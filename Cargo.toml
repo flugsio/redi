@@ -1,0 +1,6 @@
+[package]
+name = "redi"
+version = "0.1.0"
+authors = ["Jimmie Elvenmark <flugsio@gmail.com>"]
+
+[dependencies]
