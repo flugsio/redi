@@ -1,31 +1,17 @@
-use std::collections::BTreeSet;
+// use std::collections::BTreeSet;
 
-#[derive(Clone)]
-pub enum Entity {
-    Book(Book),
-    Spell
-}
-
-pub enum Action {
-    Read,
-}
-
-pub trait Item {
-    fn what(&self) -> String;
-    fn name(&self) -> String;
-    fn actions(&self) -> Vec<Action>;
-    fn trigger(&self, action: Action);
-}
+use entity::Action;
+use entity::Item;
 
 #[derive(Clone)]
 pub struct Book {
     name: String,
-    //pub pages: BTreeSet<Page>,
-    pub pages: Vec<Page>,
+    //pages: BTreeSet<Page>,
+    pages: Vec<Page>,
 }
 
 #[derive(Clone)]
-pub struct Page {
+struct Page {
     page_number: i64,
 }
 
@@ -64,7 +50,7 @@ impl Book {
     }
 
     pub fn describe(&self) -> String {
-        //if 
+        // TODO: implement
         "".to_string()
     }
 }
