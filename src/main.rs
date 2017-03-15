@@ -1,5 +1,6 @@
 use std::{io, thread, time};
 use std::io::Write;
+use std::time::SystemTime;
 
 mod entity;
 mod phrases;
@@ -11,7 +12,8 @@ use phrases::Phrases;
 fn main() {
     let book1 = entity::Book::new("The empty lake", 7);
     let items = vec!(Entity::Book(book1), Entity::Spell);
-    write_slowly(&Phrases::random_welcome());
+    let time = SystemTime::now();
+    write_slowly(&random(Phrases::welcome_messages(), time));
 
     loop {
         let command = readln();
@@ -21,12 +23,18 @@ fn main() {
             Some("list") => show_inventory(items.clone()),
             Some("help") => println!("Try list or use"),
             Some("quit") => {
-                ragequit();
+                write_slowly(&random(Phrases::quit_messages(), time));
                 break
             },
             _ => println!("try again")
         }
     }
+}
+
+fn random(list: Vec<String>, time: SystemTime) -> String {
+    // TODO, replace with real rand
+    let i = time.elapsed().ok().unwrap().subsec_nanos() % list.len() as u32;
+    list[i as usize].clone()
 }
 
 fn write_slowly(message: &str) {
@@ -56,10 +64,6 @@ fn show_inventory(items: Vec<Entity>) {
         }
     }
     println!("");
-}
-
-fn ragequit() {
-    write_slowly(&Phrases::random_ragequit());
 }
 
 fn readln() -> String {
