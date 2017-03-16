@@ -39,4 +39,24 @@ impl Phrases {
             "You drop everything you carry and run for your life".to_string(),
             )
     }
+
+    pub fn help_messages() -> Vec<String> {
+        vec!(
+            "Just try something, anything".to_string(),
+            "You think that you deserve help? What did you ever help me with?".to_string(),
+            "I recommend the most pouplar option to just quit".to_string(),
+            "There there, try to calm down. Screaming will not help you.".to_string(),
+            "I could tell you how to win, but would you trust me?".to_string(),
+            )
+    }
+
+    pub fn what_messages() -> Vec<String> {
+        vec!(
+            "I understand, but maybe you should search the room first".to_string(),
+            "You can always give up and quit".to_string(),
+            "Don't be so needy".to_string(),
+            "You thought I had time to implement that?! think again".to_string(),
+            "Maybe use one of your items".to_string(),
+            )
+    }
 }

@@ -21,12 +21,16 @@ fn main() {
         // TODO: add an engine to analyse requests to responses
         match command.split_whitespace().nth(0) {
             Some("list") => show_inventory(items.clone()),
-            Some("help") => println!("Try list or use"),
+            Some("items") => show_inventory(items.clone()),
+            Some("help") => write_slowly(&random(Phrases::help_messages(), time)),
+            Some("yes") => write_slowly("I think not."),
+            Some("no") => write_slowly("Yes I agree"),
+            //Some("search") => TODO search the current container, could take arguments
             Some("quit") => {
                 write_slowly(&random(Phrases::quit_messages(), time));
                 break
             },
-            _ => println!("try again")
+            _ => write_slowly(&random(Phrases::what_messages(), time))
         }
     }
 }
