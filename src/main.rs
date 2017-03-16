@@ -42,14 +42,16 @@ fn random(list: Vec<String>, time: SystemTime) -> String {
 }
 
 fn write_slowly(message: &str) {
-    for word in message.split_whitespace() {
-        for letter in word.chars() {
-            print!("{}", letter);
-            io::stdout().flush().unwrap();
-            thread::sleep(time::Duration::from_millis(20));
-        }
-        print!(" ");
-        thread::sleep(time::Duration::from_millis(100));
+    for letter in message.chars() {
+        print!("{}", letter);
+        io::stdout().flush().unwrap();
+        let delay = match letter {
+            '.' => 300,
+            ',' => 100,
+            ' ' => 130,
+            _ => 25
+        };
+        thread::sleep(time::Duration::from_millis(delay));
     }
     println!("");
 }
