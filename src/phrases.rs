@@ -1,4 +1,6 @@
 
+#![allow(dead_code)]
+
 pub struct Phrase {
     pub message: String,
 }
@@ -53,7 +55,7 @@ impl Phrases {
     pub fn what_messages() -> Vec<String> {
         vec!(
             "I understand, but maybe you should search the room first".to_string(),
-            "You can always give up and quit".to_string(),
+            "You can always give up and quit instead".to_string(),
             "Don't be so needy".to_string(),
             "You thought I had time to implement that?! think again".to_string(),
             "Maybe use one of your items".to_string(),

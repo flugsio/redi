@@ -4,12 +4,15 @@ use std::time::SystemTime;
 
 mod entity;
 mod phrases;
+mod area;
+mod world;
 
 use entity::Entity;
 use entity::Item;
 use phrases::Phrases;
 
 fn main() {
+    let world = world::World::new();
     let book1 = entity::Book::new("The empty lake", 7);
     let items = vec!(Entity::Book(book1), Entity::Spell);
     let time = SystemTime::now();
@@ -23,6 +26,8 @@ fn main() {
             Some("list") => show_inventory(items.clone()),
             Some("items") => show_inventory(items.clone()),
             Some("help") => write_slowly(&random(Phrases::help_messages(), time)),
+            Some("where") => write_slowly(format!(
+                    "you are here: {}", world.location.borrow().name()).as_str()),
             Some("yes") => write_slowly("I think not."),
             Some("no") => write_slowly("Yes I agree"),
             //Some("search") => TODO search the current container, could take arguments
