@@ -3,8 +3,8 @@ use std::rc::Rc;
 use std::cell::RefCell;
 
 pub struct Area {
-    name: String,
-    links: HashMap<String, Rc<RefCell<Area>>>,
+    pub name: String,
+    pub links: HashMap<String, Rc<RefCell<Area>>>,
 }
 
 impl Area {
@@ -20,6 +20,10 @@ impl Area {
                    second: Rc<RefCell<Area>>, return_name: &str) {
         first.borrow_mut().add(exit_name.to_string(), second.clone());
         second.borrow_mut().add(return_name.to_string(), first);
+    }
+
+    pub fn find(&self, name: String) -> Option<Rc<RefCell<Area>>> {
+       self.links.get(&name).map(|a| a.clone())
     }
 
     pub fn name(&self) -> String {

@@ -23,4 +23,17 @@ impl World {
             previous: start,
         }
     }
+
+     pub fn goto(&mut self, name: String) -> bool {
+         let new = self.location.borrow().find(name);
+         match new {
+             Some(new) =>  {
+                 self.previous = self.location.clone();
+                 self.location = new;
+                 true
+             },
+             None => false
+         }
+     }
+
 }
