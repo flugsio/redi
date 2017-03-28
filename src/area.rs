@@ -22,8 +22,8 @@ impl Area {
         second.borrow_mut().add(return_name.to_string(), first);
     }
 
-    pub fn find(&self, name: String) -> Option<Rc<RefCell<Area>>> {
-       self.links.get(&name).map(|a| a.clone())
+    pub fn find(&self, name: &str) -> Option<Rc<RefCell<Area>>> {
+       self.links.get(name).map(|a| a.clone())
     }
 
     pub fn name(&self) -> String {

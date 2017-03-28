@@ -34,7 +34,7 @@ fn main() {
                     "you are here: {}", world.location.borrow().name()).as_str()),
             Some("what") => describe_location(world.location.clone()),
             Some("go") => {
-                if world.goto(command.split_whitespace().nth(1).unwrap().to_string()) {
+                if world.goto(command.split_whitespace().nth(1).unwrap()) {
                     write_slowly("You have arrived");
                 } else {
                     write_slowly("No such location");
