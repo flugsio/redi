@@ -30,12 +30,12 @@ fn main() {
             Some("list") => show_inventory(items.clone()),
             Some("items") => show_inventory(items.clone()),
             Some("help") => write_slowly(&random(Phrases::help_messages(), time)),
-            Some("where") => write_slowly(format!(
-                    "you are here: {}", world.location.borrow().name()).as_str()),
+            Some("where") => write_slowly(&format!(
+                    "you are here: {}", world.location.borrow().name())),
             Some("what") => describe_location(world.location.clone()),
             Some("go") => {
                 if world.goto(command.split_whitespace().nth(1).unwrap()) {
-                    write_slowly("You have arrived");
+                    write_slowly(&format!("You have moved to {}", world.location.borrow().name()));
                 } else {
                     write_slowly("No such location");
                 }
@@ -80,10 +80,10 @@ fn show_inventory(items: Vec<Entity>) {
         write_slowly("  You rummage through your pockets, but thing nothing");
     } else {
         for item in items {
-            write_slowly(match item {
+            write_slowly(&match item {
                 Entity::Book(b) => format!(" * {}: {}, {}", b.what(), b.name(), b.describe()),
                 Entity::Spell => format!(" * one crappy spell"),
-            }.as_str());
+            });
         }
     }
     println!("");
@@ -91,7 +91,8 @@ fn show_inventory(items: Vec<Entity>) {
 
 fn describe_location(location: Rc<RefCell<Area>>) {
     for (path, link) in location.borrow().links.iter() {
-        write_slowly(format!("{} leading to {}", path, link.borrow().name).as_str());
+        // TODO: only print location name if it has been visited before
+        write_slowly(&format!("{} leading to {}", path, link.borrow().name));
     }
 }
 

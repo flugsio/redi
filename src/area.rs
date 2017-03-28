@@ -16,6 +16,10 @@ impl Area {
         }
     }
 
+    pub fn wrap(self) -> Rc<RefCell<Area>> {
+        Rc::new(RefCell::new(self))
+    }
+
     pub fn connect(first: Rc<RefCell<Area>>, exit_name: &str,
                    second: Rc<RefCell<Area>>, return_name: &str) {
         first.borrow_mut().add(exit_name.to_string(), second.clone());
